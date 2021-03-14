@@ -19,7 +19,7 @@ docker run -d -p 5000:5000 cvrp python /CVRProblem/app.py "testcase.json"
 ## Alternative: API
 Alternatively, you can also run the programme via an API. 
 Please do not pass a JSON file as an argument. 
-You will receive the answer as JSON via http://127.0.0.1:5000/packaging via POST request.
+You will receive the answer as JSON via http://127.0.0.1:5000/pathfinding via POST request.
 
 
 ## JSON Input
