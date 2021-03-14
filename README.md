@@ -6,7 +6,7 @@ Our participant IDs in the challenge were: CC-VOL1-14, CC-VOL1-16, CC-VOL1-85
 
 
 
-##Docker
+## Docker
 Please use the following commands to execute the project 
 and enter the relative path to the root directory as the path.
 ```commandline
@@ -16,7 +16,7 @@ docker run -d -p 5000:5000 cvrp python /CVRProblem/app.py "testcase.json"
 ```
 
 
-##Alternative: API
+## Alternative: API
 Alternatively, you can also run the programme via an API. 
 Please do not pass a JSON file as an argument. 
 You will receive the answer as JSON via http://127.0.0.1:5000/packaging via POST request.
