@@ -17,8 +17,6 @@ from pathfinding.SMatrix import SMatrix
 import functools
 import multiprocessing
 import ctypes
-import numpy as np
-from scipy.sparse import csr_matrix, dok_matrix
 
 
 class Network:
@@ -49,10 +47,10 @@ class Network:
         # print(np.array(self.paths.toarray()))
         self.fill()
         # print(np.array(self.paths.toarray()))
-        self.compress()
+        # self.compress()
         # print(np.array(self.paths.toarray()))
         # sort after further
-        items = self.sort_packs(0, self.compress_store.copy(), True)
+        items = self.sort_packs(0, [i for i in range(len(self.picks))], True)
         return self.optimize(items)
 
     def fill(self):
@@ -78,7 +76,7 @@ class Network:
             load = pick[1]
             node = pick[0]
             way = self.paths[origin, node]
-            res.append([p, way, load])
+            res.append([node, way, load, p])
 
         if furthest:
             res.sort(key=lambda k: (k[1], k[2]), reverse=True)
@@ -122,11 +120,11 @@ class Network:
             # start with furthest
             load = items[0][2]
             origin = items[0][0]
-            res = [origin]
+            res = [items[0][3]]
             items.remove(items[0])
             full = False
             while not full:
-                nitems = [i[0] for i in items]
+                nitems = [i[3] for i in items]
                 closest = self.sort_packs(origin, nitems)
                 norigin = -1
                 for cnode in closest:
@@ -134,7 +132,7 @@ class Network:
                         continue
                     load = load + cnode[2]
                     norigin = cnode[0]
-                    res.append(norigin)
+                    res.append(cnode[3])
                     for i in items:
                         if norigin == i[0]:
                             items.remove(i)
