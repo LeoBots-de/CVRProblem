@@ -134,7 +134,7 @@ class Network:
                     norigin = cnode[0]
                     res.append(cnode[3])
                     for i in items:
-                        if norigin == i[0]:
+                        if cnode[3] == i[3]:
                             items.remove(i)
                             break
                     break
